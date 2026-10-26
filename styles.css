@@ -1,0 +1,175 @@
+:root {
+  --ink: #18211e;
+  --muted: #68716d;
+  --paper: #f4f1e8;
+  --surface: #fffdf7;
+  --green: #174b3a;
+  --lime: #c8db62;
+  --weekend: #dcedbe;
+  --line: #d6d5cd;
+  --error: #9a352f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(24, 33, 30, .035) 1px, transparent 1px),
+    var(--paper);
+  background-size: 100% 32px;
+  font-family: "Inter", sans-serif;
+}
+
+button, input { font: inherit; }
+
+.page-shell {
+  width: min(1080px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 40px 0 64px;
+}
+
+.masthead {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  aspect-ratio: 1;
+  color: var(--surface);
+  background: var(--green);
+  border-radius: 50%;
+  font: 500 18px "DM Mono", monospace;
+}
+
+.eyebrow {
+  margin: 0 0 2px;
+  color: var(--green);
+  font: 500 12px "DM Mono", monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font: 600 clamp(34px, 6vw, 58px)/.95 "Fraunces", serif;
+}
+
+.today-label {
+  max-width: 200px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: right;
+}
+
+.controls {
+  display: flex;
+  align-items: end;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.controls form { width: min(430px, 100%); }
+.controls label { display: block; margin-bottom: 8px; font-weight: 600; }
+.field-row { display: grid; grid-template-columns: 1fr auto; }
+
+input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  font: 500 18px "DM Mono", monospace;
+}
+
+input:focus { box-shadow: inset 0 0 0 2px var(--lime); }
+
+button {
+  height: 48px;
+  padding: 0 18px;
+  color: white;
+  background: var(--green);
+  border: 1px solid var(--green);
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .18s ease, transform .18s ease;
+}
+
+button span { display: inline-block; margin-left: 8px; }
+button:hover { background: #23644e; }
+button:active { transform: translateY(1px); }
+
+.status {
+  min-height: 24px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.status.error { color: var(--error); font-weight: 600; }
+
+.next-holiday {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 20px;
+  margin: 18px 0 30px;
+  padding: 22px 24px;
+  background: var(--lime);
+  border-left: 8px solid var(--green);
+}
+
+.next-holiday p { margin: 0 0 5px; font: 500 12px "DM Mono", monospace; text-transform: uppercase; }
+.next-holiday strong { font: 600 clamp(22px, 4vw, 32px) "Fraunces", serif; }
+.next-holiday .days-left { align-self: center; font: 500 36px "DM Mono", monospace; }
+.next-holiday .days-left span { display: block; font-size: 11px; text-align: right; text-transform: uppercase; }
+
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.results-heading h2 { margin: 0; font: 600 26px "Fraunces", serif; }
+.count { margin: 0; color: var(--green); font: 500 13px "DM Mono", monospace; }
+.table-wrap { overflow-x: auto; border-top: 1px solid var(--ink); }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 15px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+th { font: 500 11px "DM Mono", monospace; text-transform: uppercase; }
+td { background: rgba(255, 253, 247, .72); }
+tbody tr.weekend td { background: var(--weekend); }
+td:first-child { font: 500 14px "DM Mono", monospace; }
+td:nth-child(2) { color: var(--muted); }
+td:nth-child(3) { width: 55%; font-weight: 600; }
+td:last-child { color: var(--muted); font-size: 13px; }
+
+@media (max-width: 680px) {
+  .page-shell { width: min(100% - 24px, 1080px); padding-top: 24px; }
+  .masthead { grid-template-columns: auto 1fr; }
+  .today-label { grid-column: 1 / -1; max-width: none; text-align: left; }
+  .next-holiday { grid-template-columns: 1fr auto; padding: 18px; }
+  th, td { padding: 13px 8px; }
+  th:nth-child(4), td:nth-child(4) { display: none; }
+  td:nth-child(3) { width: auto; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  tbody tr { animation: reveal .28s both; }
+  @keyframes reveal { from { opacity: 0; transform: translateY(5px); } }
+}

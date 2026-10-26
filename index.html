@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Consulte os feriados nacionais brasileiros por ano.">
+  <title>Feriados do Brasil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="masthead">
+      <div class="brand-mark" aria-hidden="true">BR</div>
+      <div>
+        <p class="eyebrow">Calendário nacional</p>
+        <h1>Feriados do Brasil</h1>
+      </div>
+      <p class="today-label" id="todayLabel"></p>
+    </header>
+
+    <section class="controls" aria-label="Consulta de feriados">
+      <form id="holidayForm">
+        <label for="yearInput">Ano</label>
+        <div class="field-row">
+          <input id="yearInput" name="year" type="number" inputmode="numeric" required>
+          <button type="submit">Consultar <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </section>
+
+    <section id="status" class="status" role="status" aria-live="polite"></section>
+
+    <section id="nextHoliday" class="next-holiday" hidden></section>
+
+    <section class="results" id="results" aria-labelledby="resultsTitle">
+      <div class="results-heading">
+        <h2 id="resultsTitle">Feriados nacionais</h2>
+        <p id="holidayCount" class="count"></p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Data</th>
+              <th scope="col">Dia</th>
+              <th scope="col">Feriado</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody id="holidayTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
